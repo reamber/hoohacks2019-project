@@ -14,9 +14,7 @@ Django==2.1.7
 django-bootstrap==0.2.4
 django-bootstrap4==0.0.7
 django-crispy-forms==1.7.2
-django-directmessages==0.9.7
 django-heroku==0.3.1
-django-messages==0.5.3
 gunicorn==19.9.0
 hyperlink==18.0.0
 idna==2.8
