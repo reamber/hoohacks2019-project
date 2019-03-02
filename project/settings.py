@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = 'zox%lihi52$rh(7a1rnpa%uv+p#j5#6f17$4fc53sw*%)aj8x2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -177,15 +178,4 @@ SOCIAL_AUTH_FACEBOOK_SECRET ='7d8aa655fc1a305d440cdb0abe8ef5b6' #app key
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# LOGIN_URL = 'login'
-# LOGOUT_URL = 'logout'
-# LOGIN_REDIRECT_URL = 'home'
-#
-# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-#
-# SOCIAL_AUTH_FACEBOOK_KEY = '429271224509078'
-# SOCIAL_AUTH_FACEBOOK_SECRET = '7d8aa655fc1a305d440cdb0abe8ef5b6'
-#
-# SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
-# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+django_heroku.settings(locals())
