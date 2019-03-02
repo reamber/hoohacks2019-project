@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reminder.apps.ReminderConfig',
+    'pages',
+    'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
