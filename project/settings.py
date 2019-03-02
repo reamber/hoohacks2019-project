@@ -37,11 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reminder.apps.ReminderConfig',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+
     'pages',
+    'users',
+
     'bootstrap4',
     'crispy_forms',
-    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -61,7 +69,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,11 +118,37 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-
-    'social_core.backends.facebook.FacebookOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email','public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -135,13 +169,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+AUTH_USER_MODEL = 'users.CustomUser'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '429271224509078!'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET ='7d8aa655fc1a305d440cdb0abe8ef5b6' #app key
+
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
-SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
-
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
-SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
+#
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+#
+# SOCIAL_AUTH_FACEBOOK_KEY = '429271224509078'
+# SOCIAL_AUTH_FACEBOOK_SECRET = '7d8aa655fc1a305d440cdb0abe8ef5b6'
+#
+# SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
+# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
+# SOCIAL_AUTH_RAISE_EXCEPTIONS = False
