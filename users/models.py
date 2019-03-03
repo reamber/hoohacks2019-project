@@ -20,16 +20,3 @@ class CustomUser(AbstractUser):
         return self.first_n + ' ' + self.last_n
 
 
-
-
-
-class Pill(models.Model):
-    person = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    pill_text = models.CharField(max_length=500, blank=True)
-    startDay = models.DateField(default=datetime.date.today)
-    remindTimes = models.TimeField();
-    endDay = models.DateField(null=True)
-
-    def __str__(self):
-        return self.name
