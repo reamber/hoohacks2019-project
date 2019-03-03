@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'avatar',
+    'userprofiles2',
 
     'pages',
     'users',
+    'events',
 
     'bootstrap4',
     'crispy_forms',
@@ -150,6 +153,8 @@ SITE_ID = 1
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
+AUTH_USER_MODEL = 'accounts.User'
+SOCIALACCOUNT_EMAIL_VERIFICATION = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

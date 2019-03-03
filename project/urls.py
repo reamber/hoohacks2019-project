@@ -22,7 +22,11 @@ urlpatterns = [
     path('', include('pages.urls')),
 
     path('admin/', admin.site.urls),
-    path('users/', include('users.urls')),  # new
-    path('accounts/', include('allauth.urls')),  # new
+    path('users/', include('users.urls')),
+    path('accounts/', include('allauth.urls')),
+    # path('calendar/', include('events.urls')),
+    path('profile/', include('userprofiles2.urls')),
+    path('avatar/', include('avatar.urls')),
+
 
 ]
