@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from project import settings
 from django.utils.translation import ugettext_lazy as _
+import datetime
+import django.utils.timezone as timezone
 
 
 GENDER = (('man', 'Man'), ('woman', 'Woman'))
@@ -41,3 +43,16 @@ class UserProfile(models.Model):
     def update_completion_level(self):
         self.completion_level = self.get_completion_level()
         self.save()
+
+
+class Pill(models.Model):
+    name = models.CharField(max_length=200, default="Med1")
+    desc = models.CharField(max_length=500, blank=True)
+
+    sDate = models.DateField(default=timezone.now)
+    time = models.TimeField(default=datetime.time)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name="user", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

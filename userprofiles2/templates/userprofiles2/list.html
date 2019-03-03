@@ -1,0 +1,17 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<h1>Pills</h1>
+
+<ul class="list-group">
+    {% for p in pills_list%}
+    <li class="list-group-item">{{ p.pill_name }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'profile-home'%}" class="btn btn-primary btn-lg active">Back to Profile</a>
+
+</body>

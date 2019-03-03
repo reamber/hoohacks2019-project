@@ -14,8 +14,6 @@ class CustomUser(AbstractUser):
     last_n = models.CharField(max_length=200, blank=True)
     email = models.EmailField()
 
-    profilePic = models.ImageField(blank=True)
-
     def __str__(self):
         return self.first_n + ' ' + self.last_n
 

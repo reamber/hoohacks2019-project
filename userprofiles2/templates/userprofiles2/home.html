@@ -3,6 +3,7 @@
 
 {% block title %}{% trans "My profile" %}{% endblock %}
 
+
 {% block content %}
 <style>
 .grey {
@@ -12,15 +13,43 @@
 	color:green;
 }
 </style>
-<div class="row">
-	<div class="col-xs-12 col-md-offset-1 col-md-10 col-md-offset-1 col-lg-offset-2 col-lg-8 col-lg-offset-2">
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="mainNavL">
+  <a class="navbar-brand" href="#">RxMinder</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile/">Profile</a>
+      </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="/calendar/">Calendar</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<br>
+<br>
+
+
+<div>
+	<div>
 		<div style="float:left;margin:1em 1em 0 0">
 			<a href="{% url 'avatar_change' %}">
 				{% avatar user 50 class="img-circle img-responsive" style="vertical-align:center" id="user_avatar" %}
 			</a>
 		</div>
 		<h1>{{ user.username }}</h1>
-		<p>{% if profile.completion_level == 100 %}<i class="fa fa-user fa-lg success"></i>&nbsp;{% endif %}{% trans "Profile completed at" %}
+		<p>{% if profile.completion_level == 100 %}<i class="fa fa-user fa-lg success"></i>&nbsp;{% endif %}{% trans "Profile completed " %}
 			<span class="generic_bold">
 				{{ profile.completion_level }}%
 			</span>
@@ -34,7 +63,7 @@
 			<p class="alert alert-info text-center">
 				<i class="fa fa-user-times fa-lg"></i>&nbsp;{% trans "Your profile must be completed in order to access all the features of the site" %}
 			</p>
-			<h3 class="text-center" style="margin-bottom:1.5em">{% trans "Thank you to complete these informations:" %}</h3>
+			<h3 class="text-center" style="margin-bottom:1.5em">{% trans "Please complete your profile:" %}</h3>
 		{% endif %}
 		<div class="row">
 			<div class="col-sm-6">
@@ -49,7 +78,7 @@
 				        		<i class="fa fa-check fa-2x success"></i>
 				        	{% endif %}
 				        </div>
-				        <h4><i class="fa fa-envelope-o fa-lg"></i>&nbsp;{% trans "Email adress verification" %}</h4>
+				        <h4><i class="fa fa-envelope-o fa-lg"></i>&nbsp;{% trans "Email address verification" %}</h4>
 			        </div>
 			        <div class="panel-body">
 			        	{% if not profile.email_is_verified %}							
@@ -72,7 +101,7 @@
 				        		<i class="fa fa-check fa-2x text-success"></i>
 				        	{% endif %}
 				        </div>
-				        <h4><i class="fa fa-book fa-lg"></i>&nbsp;{% trans "Personal infos" %}</h4>
+				        <h4><i class="fa fa-book fa-lg"></i>&nbsp;{% trans "Personal Info" %}</h4>
 			        </div>
 			        <div class="panel-body">
 						{% if profile.personal_info_is_completed %}
@@ -92,6 +121,8 @@
 				</p>
 			</div>
 		</div>
+		<a href="{%url 'pills'%}" class="btn btn-link">Add Medication</a>
 	</div>
 </div>
+
 {% endblock content %}

@@ -3,7 +3,7 @@
 from django import forms
 from django.http import Http404
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, Pill
 
 
 class IdentiteForm(forms.ModelForm):
@@ -38,3 +38,9 @@ class EmailForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EmailForm, self).__init__(*args, **kwargs)
         self.fields['email'].required = True
+
+
+class PillForm(forms.ModelForm):
+    class Meta:
+        model = Pill
+        fields = ['name', 'desc', 'sDate', 'time']

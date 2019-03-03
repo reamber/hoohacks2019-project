@@ -1,10 +1,15 @@
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
 from django.views.generic.edit import UpdateView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import UserProfile
-from .forms import IdentiteForm
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
+from django.views import generic
+from django.utils import timezone
+
+from .models import UserProfile, Pill
+from .forms import IdentiteForm, PillForm
 
 
 class ProfileHomeView(LoginRequiredMixin, TemplateView):
@@ -46,3 +51,22 @@ class ProfileIdentite(LoginRequiredMixin, UpdateView):
         profile.completion_level = profile.get_completion_level()
         profile.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class PillView(generic.ListView):
+    model = Pill
+    template_name = 'userprofiles2/list.html'
+
+    def get_queryset(self):
+        return Pill.objects.all()
+
+
+def get_pill(request):
+    if request.method == 'POST':
+        form = PillForm(request.POST)
+        if form.is_valid():
+            pill = form.save()
+            return HttpResponseRedirect(reverse('pill-list'))
+    else:
+        form = PillForm()
+    return render(request, 'userprofiles2/pill_form.html', {'form': form})

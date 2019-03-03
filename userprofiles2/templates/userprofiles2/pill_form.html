@@ -1,0 +1,23 @@
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+
+
+<body>
+
+<h1>Add a Medication</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit New Medication" class="btn btn-primary btn-lg active">
+</form>
+
+</body>
